@@ -26,6 +26,7 @@ public class EnemyAI : MonoBehaviour
         if (Time.time > time1)
         {
             time1 = Time.time + timeBtwMovement;
+            sr.color = Color.white;
             Attack();
         }
     }
@@ -54,7 +55,11 @@ public class EnemyAI : MonoBehaviour
 
         foreach (Collider2D item in playerHit)
         {
-            Debug.Log("Ho colpito " + item.name);
+            if (item.name != "ground")
+            {
+                Debug.Log("Ho colpito " + item.name);
+                //item.GetComponent<SpriteRenderer>().color = Color.red;
+            }
         }
     }
 

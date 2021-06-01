@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sr;
     private Transform transform;
     private Animator animator;
+    private int direction;
 
     void Start()
     {
@@ -17,24 +18,34 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    float time1 = 0, timeBtwSome = 0.5f;
     void Update()
     {
+        if (Time.time > time1)
+        {
+            //sr.color = Color.white;
+            time1 = Time.time + timeBtwSome;
+        }
         sr.flipY = false;
         float movement = Input.GetAxis("Horizontal");
-        if(movement != 0)
+        if (movement != 0)
         {
             transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
-            animator.SetTrigger("walk");
+            animator.SetBool("isIdle", false);
         }
         else
         {
-            animator.SetTrigger("idle");
+            animator.SetBool("isIdle", true);
         }
-        
+
         FlipPlayer(movement);
 
         CheckJump();
 
+        if (rigidbody.velocity.y == 0)
+        {
+            animator.SetBool("isJumping", false);
+        }
     }
 
     void FlipPlayer(float movement)
@@ -42,10 +53,12 @@ public class PlayerMovement : MonoBehaviour
         if (movement < 0)
         {
             sr.flipX = true;
+            direction = -1;
         }
         else if (movement > 0)
         {
             sr.flipX = false;
+            direction = 1;
         }
     }
 
@@ -55,6 +68,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rigidbody.AddForce(new Vector3(0, JumpForce), ForceMode2D.Impulse);
             transform.eulerAngles = new Vector3(0, 0, 0);
+            animator.SetBool("isJumping", true);
         }
+    }
+    public int GetDirection()
+    {
+        return direction;
     }
 }
