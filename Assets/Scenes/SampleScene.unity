@@ -200,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0.02, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -309,7 +309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792211252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0185, y: -4.1589646, z: 0}
+  m_LocalPosition: {x: 0.0185, y: -4.14, z: 0}
   m_LocalScale: {x: 1.275, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -327,6 +327,7 @@ GameObject:
   - component: {fileID: 815112871}
   - component: {fileID: 815112874}
   - component: {fileID: 815112873}
+  - component: {fileID: 815112875}
   m_Layer: 6
   m_Name: player-sprite
   m_TagString: Untagged
@@ -393,8 +394,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815112870}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.19, y: 0.13, z: 0}
-  m_LocalScale: {x: 0.4649, y: 0.4649, z: 0.4649}
+  m_LocalPosition: {x: 0.1895, y: -2.54, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -412,7 +413,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.1838026, y: 0.05725205}
+  m_Offset: {x: -1.1838026, y: 0.060188174}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -423,7 +424,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.4658298, y: 4.718931}
+  m_Size: {x: 3.4658298, y: 4.7130585}
   m_EdgeRadius: 0
 --- !u!50 &815112874
 Rigidbody2D:
@@ -446,6 +447,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &815112875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815112870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ea7ada61dd1aea48821bff0ec0ba2a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementSpeed: 8
+  JumpForce: 5
 --- !u!1 &1874514905
 GameObject:
   m_ObjectHideFlags: 0
