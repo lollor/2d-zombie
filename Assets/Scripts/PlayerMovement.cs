@@ -6,11 +6,13 @@ public class PlayerMovement : MonoBehaviour
     public float JumpForce = 1;
     private Rigidbody2D rigidbody;
     private SpriteRenderer sr;
+    private Transform transform;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        transform = GetComponent<Transform>();
     }
 
     void Update()
@@ -41,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && Mathf.Abs(rigidbody.velocity.y) < 0.001f)
         {
             rigidbody.AddForce(new Vector3(0, JumpForce), ForceMode2D.Impulse);
+            transform.eulerAngles = new Vector3(0, 0, 0);
         }
     }
 }
