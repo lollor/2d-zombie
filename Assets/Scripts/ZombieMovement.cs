@@ -15,13 +15,13 @@ public class ZombieMovement : MonoBehaviour
 
     void Update()
     {
-        float movement = 1;
+        /*float movement = 1;
 
         if (Time.time > time1)
         {
             time1 = Time.time + timeBtwMovement;
             transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
-        }
+        }*/
 
     }
 }

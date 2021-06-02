@@ -66,8 +66,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && Mathf.Abs(rigidbody.velocity.y) < 0.001f)
         {
+            if (transform.eulerAngles != new Vector3(0,0,0))
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                return;
+            }
             rigidbody.AddForce(new Vector3(0, JumpForce), ForceMode2D.Impulse);
-            transform.eulerAngles = new Vector3(0, 0, 0);
             animator.SetBool("isJumping", true);
         }
     }
