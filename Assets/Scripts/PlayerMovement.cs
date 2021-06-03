@@ -30,6 +30,10 @@ public class PlayerMovement : MonoBehaviour
         float movement = Input.GetAxis("Horizontal");
         if (movement != 0)
         {
+            if (transform.eulerAngles != new Vector3(0, 0, 0))
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+            }
             transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
             animator.SetBool("isIdle", false);
         }
@@ -66,11 +70,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && Mathf.Abs(rigidbody.velocity.y) < 0.001f)
         {
-            if (transform.eulerAngles != new Vector3(0,0,0))
-            {
-                transform.eulerAngles = new Vector3(0, 0, 0);
-                return;
-            }
             rigidbody.AddForce(new Vector3(0, JumpForce), ForceMode2D.Impulse);
             animator.SetBool("isJumping", true);
         }

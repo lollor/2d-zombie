@@ -5,23 +5,24 @@ using UnityEngine;
 public class Body : MonoBehaviour
 {
     //private BodyLevel bodyLevel;
-    public float MaxHealth;
+    public float maxHealth = 10;
     private float currentHealth;
+    public HealthBar healthBar;
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = MaxHealth;
+        currentHealth = maxHealth;
+        if (healthBar != null)
+            healthBar.InitializeHealthBar(maxHealth);
     }
-
-    // Update is called once per frame
-    /*void Update()
-    {
-
-    }*/
     public void RemoveLifePoints(float lifePointsRemoved)
     {
         if (currentHealth > 0.0f)
+        {
             currentHealth -= lifePointsRemoved;
+            if (healthBar != null)
+                healthBar.SetHealth(currentHealth);
+        }
     }
     public bool IsDead()
     {
