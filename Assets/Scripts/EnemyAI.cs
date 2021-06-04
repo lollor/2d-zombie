@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -65,7 +66,11 @@ public class EnemyAI : MonoBehaviour
             time1 = Time.time + timeBtwAttack;
             sr.color = Color.white;
             isIdle = false;
-            Attack();
+            if (Util.CheckValue(player.position.x - transform.position.x, 0f, 1f))
+            {
+                Debug.Log("Player vicino, attacco");
+                Attack();
+            }
         }
     }
 
@@ -118,7 +123,7 @@ public class EnemyAI : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         if (attackPoint != null)
-            Gizmos.DrawSphere(attackPoint.position, attackRange);
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
 
@@ -133,6 +138,7 @@ public class EnemyAI : MonoBehaviour
     {
         isIdle = true;
         animator.SetTrigger("hurt");
+        Debug.Log("Danno fatto allo zombie: " + damage);
         body.RemoveLifePoints(damage);
     }
 }

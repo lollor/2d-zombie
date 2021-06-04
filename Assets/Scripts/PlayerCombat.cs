@@ -7,17 +7,19 @@ public class PlayerCombat : MonoBehaviour
     public Transform attackPoint;
     private Transform player;
     public float attackRange = 0.5f;
-    private Animator animator;
+    public Animator animator;
     public LayerMask enemyLayers;
     public float damage = 1f;
     private float swordHitboxHeight = 0.4f;
     private PlayerMovement playerMovement;
     private Body body;
+    public float criticalMultiplier = 2f;
+    public float criticalHitProb = 0.2f;
 
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = transform.GetChild(1).GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
         player = GetComponent<Transform>();
         body = GetComponent<Body>();
@@ -46,8 +48,17 @@ public class PlayerCombat : MonoBehaviour
         if (Time.time >= nextAttackTime)
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Attack();
-                animator.SetTrigger("attack");
+                float number = Random.Range(0f, 1f);
+                if (number >= 0f && number <= criticalHitProb)
+                {
+                    Attack(damage * criticalMultiplier);
+                    animator.SetTrigger("criticalHit");
+                }
+                else
+                {
+                    Attack(damage);
+                    animator.SetTrigger("attack");
+                }
                 nextAttackTime = Time.time + 1f / attackRate;
             }
     }
@@ -56,7 +67,7 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(_delay);
         GetComponent<SpriteRenderer>().enabled = false;
     }
-    void Attack()
+    void Attack(float _damage)
     {
         //Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         if (playerMovement.GetDirection() == -1)
@@ -75,7 +86,7 @@ public class PlayerCombat : MonoBehaviour
             if (item.name != "ground")
             {
                 Debug.Log("\nHo colpito " + item.name + " attackPoint.position: " + attackPoint.position.ToString());
-                item.GetComponent<EnemyAI>().WasHit(damage);
+                item.GetComponent<EnemyAI>().WasHit(_damage);
             }
         }
     }
