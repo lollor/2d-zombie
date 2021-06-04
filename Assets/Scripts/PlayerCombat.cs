@@ -85,7 +85,7 @@ public class PlayerCombat : MonoBehaviour
         {
             if (item.name != "ground")
             {
-                Debug.Log("\nHo colpito " + item.name + " attackPoint.position: " + attackPoint.position.ToString());
+                //Debug.Log("\nHo colpito " + item.name + " attackPoint.position: " + attackPoint.position.ToString());
                 item.GetComponent<EnemyAI>().WasHit(_damage);
             }
         }

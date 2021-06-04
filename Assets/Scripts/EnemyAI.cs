@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform player;
+    private Transform player;
     private Animator animator;
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -22,6 +22,7 @@ public class EnemyAI : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         body = GetComponent<Body>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     private bool isIdle = false;
     private bool deadAnimationDone = false;
@@ -29,6 +30,11 @@ public class EnemyAI : MonoBehaviour
     private bool zombieMustDoSomething = true;
     void Update()
     {
+        if (transform.eulerAngles != new Vector3(0, 0, 0))
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            transform.position = new Vector3(transform.position.x, -3.54f);
+        }
         if (playerDead)
         {
             if (zombieMustDoSomething)
@@ -42,10 +48,16 @@ public class EnemyAI : MonoBehaviour
         {
             if (!deadAnimationDone)
             {
+                Debug.LogError("morto uno zombie");
                 animator.SetTrigger("dead");
                 deadAnimationDone = true;
-                GetComponent<Body>().enabled = false;
-                GetComponent<Collider2D>().enabled = false;
+                Destroy(gameObject, 2f);
+                if (gameObject.name == "zombie_default")
+                {
+                    GetComponent<Body>().enabled = false;
+                    GetComponent<Collider2D>().enabled = false;
+                    GetComponent<SpriteRenderer>().enabled = false;
+                }
             }
             return;
         }
@@ -68,7 +80,7 @@ public class EnemyAI : MonoBehaviour
             isIdle = false;
             if (Util.CheckValue(player.position.x - transform.position.x, 0f, 1f))
             {
-                Debug.Log("Player vicino, attacco");
+                //Debug.Log("Player vicino, attacco");
                 Attack();
             }
         }
@@ -100,13 +112,13 @@ public class EnemyAI : MonoBehaviour
     void Attack()
     {
         Collider2D[] playerHit = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        
+
         bool haAttaccato = false;
         foreach (Collider2D item in playerHit)
         {
             if (item.name != "ground")
             {
-                Debug.Log("Ho colpito " + item.name);
+                //Debug.Log("Ho colpito " + item.name);
                 //item.GetComponent<SpriteRenderer>().color = Color.red;
                 item.GetComponent<PlayerCombat>().WasHit(damage);
                 playerDead = item.GetComponent<Body>().IsDead();
@@ -138,7 +150,7 @@ public class EnemyAI : MonoBehaviour
     {
         isIdle = true;
         animator.SetTrigger("hurt");
-        Debug.Log("Danno fatto allo zombie: " + damage);
+        //Debug.Log("Danno fatto allo zombie: " + damage);
         body.RemoveLifePoints(damage);
     }
 }

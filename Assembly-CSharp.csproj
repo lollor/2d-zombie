@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F3C9DE64-7977-ECB1-6C2E-8EF82DC91C43}</ProjectGuid>
+    <ProjectGuid>{435BBAF7-3254-1CD6-3139-BECC852AE45D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -58,20 +58,20 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CharacterController2D.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
+    <Compile Include="Assets\Player\New Knight\Demo\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\WaveSpawner.cs" />
     <Compile Include="Assets\Scripts\EnemyAI.cs" />
+    <Compile Include="Assets\Player\New Knight\Demo\Scripts\GroundSensor.cs" />
+    <Compile Include="Assets\Player\New Knight\Demo\Scripts\Swordman.cs" />
     <Compile Include="Assets\Scripts\ZombieMovement.cs" />
     <Compile Include="Assets\Scripts\Body.cs" />
     <Compile Include="Assets\Scripts\Util.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerCombat.cs" />
-    <Compile Include="Assets\Player\New Knight\Demo\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Player\New Knight\Demo\Scripts\Demo_GM.cs" />
-    <Compile Include="Assets\Player\New Knight\Demo\Scripts\Swordman.cs" />
-    <Compile Include="Assets\Player\New Knight\Demo\Scripts\GroundSensor.cs" />
     <Compile Include="Assets\Player\New Knight\Demo\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Player\New Knight\Demo\Scripts\Demo_GM.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Knight\Read Me.txt" />
     <None Include="Assets\Zombie\README.txt" />
   </ItemGroup>
   <ItemGroup>
